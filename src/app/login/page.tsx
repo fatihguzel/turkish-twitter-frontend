@@ -12,8 +12,6 @@ import { useRouter } from "next/router";
 import { FormikHelpers } from "formik";
 import {loginProps} from "@/views/Login/Models/loginModel"
 
-
-
 const Login: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -25,23 +23,21 @@ const Login: React.FC = () => {
     },
     validationSchema: loginSchema,
     onSubmit: async (values: loginProps, { setSubmitting }: FormikHelpers<loginProps>) => {
-      await dispatch(loginAction(values));
-      router.push("/");
-      setSubmitting(false);
-    },  
+      try {
+        await dispatch(loginAction(values)); // Use the correct action creator returned by createAsyncThunk
+        router.push("/");
+      } catch (error) {
+        console.error("Login error:", error);
+      } finally {
+        setSubmitting(false);
+      }
+    },
+  
   });
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } = formik;
 
   return (
     <div className="flex flex-row h-screen items-center">
-      <div className="sm:block hidden md:flex md:w-1/2 xl:w-2/3 h-screen">
-        <Image
-          className="w-full h-full object-cover"
-          src={image}
-          alt="pharmacy"
-          objectFit="cover"
-        />
-      </div>
       <div className="w-full md:w-1/2 xl:w-1/3 m-auto p-16 items-center justify-center">
         <h2 className="text-3xl font-semibold mb-6">Giriş Yap</h2>
         <form className="space-y-4 " onSubmit={handleSubmit}>
