@@ -24,7 +24,7 @@ const Login: React.FC = () => {
     validationSchema: loginSchema,
     onSubmit: async (values: loginProps, { setSubmitting }: FormikHelpers<loginProps>) => {
       try {
-        await dispatch(loginAction(values)); // Use the correct action creator returned by createAsyncThunk
+        await dispatch(loginAction(values));
         router.push("/");
       } catch (error) {
         console.error("Login error:", error);
