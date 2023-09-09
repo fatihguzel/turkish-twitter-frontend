@@ -1,24 +1,21 @@
 "use client";
-import LoginView from "@/views/Account/Login/Login";
 import React, { useEffect } from "react";
 import { RootState } from "@/redux/store/store";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 
-const LoginPage = () => {
+const ProfilePage = () => {
   const isLogined = useSelector(
     (state: RootState) => state?.auth?.user?.isLogined
   );
   const router = useRouter();
   useEffect(() => {
-    console.log("isLogined", isLogined);
-    if (isLogined) {
-      router.push("/profile");
-      console.log("here");
+    if (!isLogined) {
+      router.push("/account/login");
     }
   }, [isLogined]);
 
-  return <LoginView />;
+  return <div>Profil Sayfası</div>;
 };
 
-export default LoginPage;
+export default ProfilePage;

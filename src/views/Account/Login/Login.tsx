@@ -9,8 +9,15 @@ import PaperComponent from "@/components/Paper/Paper";
 import ButtonComponent from "@/components/Button/Button";
 import DividerComponent from "@/components/Divider/Divider";
 import IconComponent from "@/components/Icon/Icon";
+import { useDispatch } from "react-redux";
+import { loginAction } from "@/redux/features/auth/asyncActions";
+import { useRouter } from "next/navigation";
+import { AppDispatch } from "@/redux/store/store";
 
 const LoginView = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const router = useRouter();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -18,7 +25,13 @@ const LoginView = () => {
     },
     validationSchema: LoginSchema,
     onSubmit: (values) => {
-      console.log("Form Gönderildi", values);
+      const data = values;
+      dispatch(loginAction(data)).then((res: any) => {
+        if (res.payload.success) {
+          router.push("/profile");
+          console.log("here");
+        }
+      });
     },
   });
 
@@ -74,8 +87,6 @@ const LoginView = () => {
                 mb-4
                 text-black
                 flex flex-col justify-center items-center
-
-
             "
               >
                 <span className="text-blue-500">Turkish Twitter</span>{" "}

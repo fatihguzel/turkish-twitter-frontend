@@ -1,17 +1,12 @@
-// import { store } from "@/redux/store/store";
+"use client";
 import "./globals.css";
-import type { Metadata } from "next";
+import React from "react";
 import { Inter } from "next/font/google";
-import Head from "next/head";
-import { ToastContainer } from "react-toastify";
-// import { Provider } from "react-redux";
+import DefaultLayout from "@/views/Layout";
+import { Provider } from "react-redux";
+import { store } from "@/redux/store/store";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Turkish Twitter",
-  description: "Turkist Twitter is a Twitter clone for Turkish people.",
-};
 
 export default function RootLayout({
   children,
@@ -19,20 +14,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    // <Provider store={store}>
-    <html lang="en">
-      <Head>
-        <meta charSet="utf-8" />
-        <meta name="description" content={`${metadata.description}`} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <body className={inter.className}>
-        {children}
-        <ToastContainer />
-      </body>
-    </html>
-    // </Provider>
+    <Provider store={store}>
+      <html lang="en">
+        <body className={inter.className}>
+          <DefaultLayout>{children}</DefaultLayout>
+        </body>
+      </html>
+    </Provider>
   );
 }
