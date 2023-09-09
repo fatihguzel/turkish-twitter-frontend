@@ -89,7 +89,13 @@ const ForgotPasswordView = () => {
                 Şifremi Unuttum
               </Typography>
               <DividerComponent className="my-4" />
-              <form onSubmit={formik.handleSubmit}>
+              <form
+                onSubmit={formik.handleSubmit}
+                className="
+              flex flex-col justify-center items-center
+              w-full
+              "
+              >
                 <TextFieldComponent
                   fullWidth
                   id="email"
@@ -104,7 +110,7 @@ const ForgotPasswordView = () => {
                   helperText={formik.touched.email && formik.errors.email}
                 />
 
-                <Box mt={2}>
+                <Box mt={2} className="w-full">
                   <ButtonComponent
                     fullWidth
                     variant="contained"
