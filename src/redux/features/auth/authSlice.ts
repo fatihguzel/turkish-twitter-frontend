@@ -40,9 +40,7 @@ const authSlice = createSlice({
     });
 
     builder.addCase(getProfileAction.rejected, (state) => {
-      console.log("patladıkk");
       state.user = initialState.user;
-
       Cookies.remove("AUTH_DATA");
     });
 

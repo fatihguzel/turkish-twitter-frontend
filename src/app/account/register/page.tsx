@@ -13,7 +13,6 @@ const RegisterPage = () => {
   useEffect(() => {
     if (isLogined) {
       router.push("/profile");
-      console.log("here");
     }
   }, [isLogined]);
   return <RegisterView />;

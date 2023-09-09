@@ -1,4 +1,3 @@
-// create api enums
 export enum ApiENUM {
   AUTH = "/auth",
   ADMIN = "/admin",

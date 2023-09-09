@@ -11,10 +11,8 @@ const LoginPage = () => {
   );
   const router = useRouter();
   useEffect(() => {
-    console.log("isLogined", isLogined);
     if (isLogined) {
       router.push("/profile");
-      console.log("here");
     }
   }, [isLogined]);
 

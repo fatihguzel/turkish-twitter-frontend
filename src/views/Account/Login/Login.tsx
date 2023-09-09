@@ -29,7 +29,6 @@ const LoginView = () => {
       dispatch(loginAction(data)).then((res: any) => {
         if (res.payload.success) {
           router.push("/profile");
-          console.log("here");
         }
       });
     },

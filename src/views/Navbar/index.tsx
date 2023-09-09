@@ -7,7 +7,7 @@ import {
   Drawer,
   List,
   Hidden,
-  Grid, // Hidden bileşeni için import ekledik
+  Grid,
 } from "@mui/material";
 import React, { useState } from "react";
 import { navItems } from "./models/navbar";
@@ -118,7 +118,7 @@ const Navbar = () => {
             "& .MuiDrawer-paper": {
               width: "30%",
               "@media (max-width: 600px)": {
-                width: "50%", // Düşük çözünürlüklerde tam genişlikte açılması için
+                width: "50%",
                 flex: 1,
               },
               flex: "none",
