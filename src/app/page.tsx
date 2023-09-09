@@ -1,18 +1,17 @@
-import ButtonComponent from "./components/Buttons/Button";
-import SwitchButton from "./components/Buttons/SwitchButton";
-import InputField from "./components/Input/Input";
+import React from "react";
 
-export default function Home() {
+const Home = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="flex flex-col items-center justify-center">
-        <h1 className="text-6xl font-bold text-center">
-          <InputField type="text" variant="outlined" label="write something"/>
-          <ButtonComponent variant="outlined" label="Click me" />
-          <SwitchButton label="Switch" className="font-mono"/>
-          <br />
-        </h1>
-      </div>
-    </main>
+    <div className="flex flex-col items-center justify-center">
+      <h1 className="text-6xl font-bold text-center text-gray-800">
+        Turkish Twitter
+      </h1>
+
+      <p className="mt-4 text-xl text-center text-gray-600">
+        Turkish Twitter is a Twitter clone for Turkish people.
+      </p>
+    </div>
   );
-}
+};
+
+export default Home;
