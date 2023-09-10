@@ -45,12 +45,12 @@ const Navbar = () => {
         "
       >
         <Toolbar>
+          <Grid item xs={2}>
+            <Typography variant="h6">Logo</Typography>
+          </Grid>
           <Hidden smDown>
             <Grid container>
-              <Grid item xs={2}>
-                <Typography variant="h6">Logo</Typography>
-              </Grid>
-              <Grid item xs={10}>
+              <Grid item xs={12}>
                 <Grid container justifyContent="flex-end">
                   {navItems.map((item) => (
                     <>

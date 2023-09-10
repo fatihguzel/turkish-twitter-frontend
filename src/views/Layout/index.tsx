@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { AppDispatch, RootState } from "@/redux/store/store";
 import { useDispatch, useSelector } from "react-redux";
-import SeoItems from "../SeoItems/SeoItems";
 import { ToastContainer } from "react-toastify";
 import Spinner from "../Spinner";
 import { getProfileAction } from "@/redux/features/auth/asyncActions";
@@ -46,7 +45,6 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
     <main
       style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
     >
-      <SeoItems />
       {isLogined && <Navbar />}
       <div
         style={{

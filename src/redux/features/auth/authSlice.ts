@@ -20,6 +20,7 @@ const initialState: authSliceDTO = {
     role: "",
     isConfirmed: false,
     confirmCode: "",
+    biography: "",
   },
 };
 

@@ -8,5 +8,6 @@ export interface authSliceDTO {
     role: string;
     isConfirmed: boolean;
     confirmCode: string;
+    biography: string;
   };
 }

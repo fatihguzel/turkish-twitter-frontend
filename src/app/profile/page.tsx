@@ -1,5 +1,6 @@
 "use client";
 import useCheckAuth from "@/hooks/useCheckAuth";
+import ProfileView from "@/views/Modules/Profile";
 import React from "react";
 
 const ProfilePage = () => {
@@ -7,7 +8,7 @@ const ProfilePage = () => {
     rootType: "private",
   });
 
-  return <div>Profil Sayfası</div>;
+  return <ProfileView />;
 };
 
 export default ProfilePage;
