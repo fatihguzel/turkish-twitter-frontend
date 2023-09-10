@@ -5,6 +5,8 @@ import { Inter } from "next/font/google";
 import DefaultLayout from "@/views/Layout";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store/store";
+import { I18nextProvider } from "react-i18next";
+import i18n from "@/config/i18n";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +39,9 @@ export default function RootLayout({
       <link rel="icon" href="/favicon.ico" />
       <html lang="en">
         <body className={inter.className}>
-          <DefaultLayout>{children}</DefaultLayout>
+          <I18nextProvider i18n={i18n}>
+            <DefaultLayout>{children}</DefaultLayout>
+          </I18nextProvider>
         </body>
       </html>
     </Provider>

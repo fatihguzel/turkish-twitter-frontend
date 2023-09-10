@@ -1,11 +1,14 @@
 "use client";
 import useCheckAuth from "@/hooks/useCheckAuth";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
   useCheckAuth({
     rootType: "private",
   });
+  const { t } = useTranslation();
+
   return (
     <div
       className="
@@ -13,9 +16,8 @@ const Home = () => {
       flex-col
       items-center
       justify-center
-      h-full
+      h-screen
       text-black
-
     "
     >
       <div
@@ -29,21 +31,9 @@ const Home = () => {
       h-full
       "
       >
-        <h1 className="text-4xl font-bold">Turkish Twitter Çok Yakında....</h1>
-        <p className="text-xl mt-4">
-          Turkish Twitter, Türkçe içerik üreticileri için özel olarak
-          tasarlanmış bir sosyal medya platformudur.
-        </p>
-        <p className="text-xl mt-4">
-          Turkish Twitter, kullanıcılarının gizliliğini ön planda tutar.
-        </p>
+        <h1 className="text-4xl font-bold">{t("HomePage.title")}</h1>
 
-        <p className="text-xl mt-4">
-          Turkish Twitter, tinder benzeri bir eşleştirme sistemi ile
-          kullanıcıları birbirleri ile tanıştırmaz. Kullanıcılar, kendi
-          içeriklerini üretir ve paylaşır. Bu içerikler, diğer kullanıcılar
-          tarafından beğenilir ve yorumlanır.
-        </p>
+        <p className="text-xl">{t("HomePage.description")}</p>
       </div>
     </div>
   );
