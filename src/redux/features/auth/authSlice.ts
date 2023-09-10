@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { authSliceDTO } from "@/dtos/slice/slice";
-import { getProfileAction, loginAction, logoutAction } from "./asyncActions";
+import {
+  getProfileAction,
+  loginAction,
+  logoutAction,
+  registerAction,
+  verifyAccountAction,
+} from "./asyncActions";
 import Cookies from "js-cookie";
 import toastHelper from "@/helper/toast/toastHelper";
 
@@ -55,6 +61,24 @@ const authSlice = createSlice({
 
       Cookies.remove("AUTH_DATA");
       toastHelper().toastErrorNotify("Çıkış Başarısız");
+    });
+
+    builder.addCase(registerAction.fulfilled, (_state) => {
+      toastHelper().toastSuccessNotify(
+        "Kayıt Başarılı. Lütfen Mailinizi Kontrol Ediniz."
+      );
+    });
+
+    builder.addCase(registerAction.rejected, (_state) => {
+      toastHelper().toastErrorNotify("Kayıt Başarısız");
+    });
+
+    builder.addCase(verifyAccountAction.fulfilled, (_state) => {
+      toastHelper().toastSuccessNotify("Hesap Doğrulama Başarılı");
+    });
+
+    builder.addCase(verifyAccountAction.rejected, (_state) => {
+      toastHelper().toastErrorNotify("Hesap Doğrulama Başarısız");
     });
   },
 });

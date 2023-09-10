@@ -5,7 +5,7 @@ const SpinnerContainer = styled("div")({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  height: "100vh",
+  height: "40vh",
 });
 
 const SpinnerOverlay = styled("div")({
@@ -29,7 +29,7 @@ const Spinner = () => {
   return (
     <SpinnerOverlay>
       <SpinnerContainer>
-        <SpinnerImage src={`/assets/spinner/giphy (1).gif`} alt="Loading..." />
+        <SpinnerImage src={`/assets/spinner/hi-smile.gif`} alt="Loading..." />
       </SpinnerContainer>
     </SpinnerOverlay>
   );

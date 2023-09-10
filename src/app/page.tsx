@@ -1,6 +1,11 @@
+"use client";
+import useCheckAuth from "@/hooks/useCheckAuth";
 import React from "react";
 
 const Home = () => {
+  useCheckAuth({
+    rootType: "private",
+  });
   return (
     <div
       className="

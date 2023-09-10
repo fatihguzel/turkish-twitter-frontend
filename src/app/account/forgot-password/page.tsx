@@ -1,20 +1,13 @@
 "use client";
 import ForgotPasswordView from "@/views/Account/ForgotPassword/ForgotPassword";
-import React, { useEffect } from "react";
-import { RootState } from "@/redux/store/store";
-import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import React from "react";
+
+import useCheckAuth from "@/hooks/useCheckAuth";
 
 const ForgotPasswordPage = () => {
-  const isLogined = useSelector(
-    (state: RootState) => state.auth.user.isLogined
-  );
-  const router = useRouter();
-  useEffect(() => {
-    if (isLogined) {
-      router.push("/profile");
-    }
-  }, [isLogined]);
+  useCheckAuth({
+    rootType: "public",
+  });
   return <ForgotPasswordView />;
 };
 

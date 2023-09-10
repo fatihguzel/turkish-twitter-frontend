@@ -19,7 +19,7 @@ export const navItems: NavItem[] = [
     children: [],
   },
   {
-    name: "Logout",
+    name: "Çıkış Yap",
     route: "/account/login",
     icon: "mdi-logout",
     children: [],

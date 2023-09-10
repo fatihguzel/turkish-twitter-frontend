@@ -54,7 +54,7 @@ const Navbar = () => {
                 <Grid container justifyContent="flex-end">
                   {navItems.map((item) => (
                     <>
-                      {item?.name === "Logout" ? (
+                      {item?.name === "Çıkış Yap" ? (
                         <ButtonComponent
                           variant="text"
                           color="inherit"

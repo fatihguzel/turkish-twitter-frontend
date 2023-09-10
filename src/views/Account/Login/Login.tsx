@@ -27,7 +27,7 @@ const LoginView = () => {
     onSubmit: (values) => {
       const data = values;
       dispatch(loginAction(data)).then((res: any) => {
-        if (res.payload.success) {
+        if (res?.payload?.success) {
           router.push("/profile");
         }
       });

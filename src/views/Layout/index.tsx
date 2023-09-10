@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import SeoItems from "../SeoItems/SeoItems";
 import { ToastContainer } from "react-toastify";
 import Spinner from "../Spinner";
-import { useRouter } from "next/navigation";
 import { getProfileAction } from "@/redux/features/auth/asyncActions";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
@@ -16,7 +15,6 @@ interface DefaultLayoutProps {
 
 const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
   const isLogined = useSelector(
     (state: RootState) => state?.auth?.user?.isLogined
@@ -34,7 +32,7 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
     return () => {
       setIsLoading(true);
     };
-  }, [router]);
+  }, [isLogined]);
 
   if (isLoading) {
     return (

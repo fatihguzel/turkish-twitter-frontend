@@ -1,32 +1,28 @@
 "use client";
 import React from "react";
-import Link from "next/link";
 import { useFormik } from "formik";
 import { Grid, Typography, Box, Container } from "@mui/material";
-import TextFieldComponent from "@/components/TextField/TextField";
 import PaperComponent from "@/components/Paper/Paper";
 import ButtonComponent from "@/components/Button/Button";
 import DividerComponent from "@/components/Divider/Divider";
-import { RegisterSchema } from "@/schema/account/register/RegisterSchema";
+import { VerifyAccountSchema } from "@/schema/account/verify/VerifyAccountSchema";
+import TextFieldComponent from "@/components/TextField/TextField";
 import { AppDispatch } from "@/redux/store/store";
 import { useDispatch } from "react-redux";
-import { registerAction } from "@/redux/features/auth/asyncActions";
+import { verifyAccountAction } from "@/redux/features/auth/asyncActions";
 import { useRouter } from "next/navigation";
 
-const RegisterView = () => {
+const VerifyAccountView = () => {
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      username: "",
-      email: "",
-      password: "",
+      confirmCode: "",
     },
-    validationSchema: RegisterSchema,
+    validationSchema: VerifyAccountSchema,
     onSubmit: (values) => {
-      let data = values;
-      dispatch(registerAction(data)).then((res) => {
-        console.log("res", res);
+      const data = values;
+      dispatch(verifyAccountAction(data)).then((res) => {
         if (res?.meta?.requestStatus === "fulfilled") {
           router.push("/account/login");
         }
@@ -39,7 +35,7 @@ const RegisterView = () => {
       <Grid container style={{ minHeight: "100vh" }}>
         <Grid
           item
-          xs={12}
+          xs={0}
           lg={7}
           sx={{
             backgroundImage:
@@ -101,58 +97,38 @@ const RegisterView = () => {
                 text-black 
             "
               >
-                Kayıt Ol
+                Hesabı Doğrula
               </Typography>
+
               <DividerComponent className="my-4" />
-              <form onSubmit={formik.handleSubmit}>
+              <form
+                onSubmit={formik.handleSubmit}
+                className="
+              flex flex-col justify-center items-center
+              w-full
+              "
+              >
+                {" "}
                 <TextFieldComponent
                   fullWidth
-                  id="username"
-                  name="username"
-                  label="Kullanıcı Adı"
+                  id="confirmCode"
+                  name="confirmCode"
+                  label="Doğrulama Kodu"
+                  type="text"
                   variant="outlined"
-                  margin="normal"
-                  value={formik.values.username}
+                  className="mb-4"
+                  value={formik.values.confirmCode}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   error={
-                    formik.touched.username && Boolean(formik.errors.username)
+                    formik.touched.confirmCode &&
+                    Boolean(formik.errors.confirmCode)
                   }
-                  helperText={formik.touched.username && formik.errors.username}
-                />
-
-                <TextFieldComponent
-                  fullWidth
-                  id="email"
-                  name="email"
-                  label="E-posta Adresi"
-                  variant="outlined"
-                  margin="normal"
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={formik.touched.email && Boolean(formik.errors.email)}
-                  helperText={formik.touched.email && formik.errors.email}
-                />
-
-                <TextFieldComponent
-                  fullWidth
-                  id="password"
-                  name="password"
-                  label="Şifre"
-                  variant="outlined"
-                  margin="normal"
-                  type="password"
-                  value={formik.values.password}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={
-                    formik.touched.password && Boolean(formik.errors.password)
+                  helperText={
+                    formik.touched.confirmCode && formik.errors.confirmCode
                   }
-                  helperText={formik.touched.password && formik.errors.password}
                 />
-
-                <Box mt={2}>
+                <Box mt={2} className="w-full">
                   <ButtonComponent
                     fullWidth
                     variant="contained"
@@ -167,36 +143,8 @@ const RegisterView = () => {
                     disabled:opacity-50
                   "
                   >
-                    Kayıt Ol
+                    Hesabı Doğrula
                   </ButtonComponent>
-
-                  <DividerComponent className="my-4" />
-                  <Grid container>
-                    <Grid
-                      item
-                      xs={12}
-                      className="
-                        text-right
-                  "
-                    >
-                      <Link href="/account/login">
-                        <ButtonComponent
-                          color="primary"
-                          variant="text"
-                          className="
-                          text-blue-500
-                          hover:text-blue-600
-                          focus:ring-blue-500
-                          focus:ring-offset-blue-200
-                          disabled:opacity-50
-                          normal-case
-                        "
-                        >
-                          Zaten Hesabın Var mı? Giriş Yap
-                        </ButtonComponent>
-                      </Link>
-                    </Grid>
-                  </Grid>
                 </Box>
               </form>
             </PaperComponent>
@@ -207,4 +155,4 @@ const RegisterView = () => {
   );
 };
 
-export default RegisterView;
+export default VerifyAccountView;
