@@ -7,19 +7,38 @@ export interface NavItem {
 
 export const navItems: NavItem[] = [
   {
-    name: "Ana Sayfa",
+    name: "ChangeLanguage",
+    route: "/language",
+    icon: "mdi-translate",
+    children: [
+      {
+        name: "tr",
+        route: "/language/tr",
+        icon: "mdi-translate",
+        children: [],
+      },
+      {
+        name: "en",
+        route: "/language/en",
+        icon: "mdi-translate",
+        children: [],
+      },
+    ],
+  },
+  {
+    name: "Home",
     route: "/",
     icon: "mdi-home",
     children: [],
   },
   {
-    name: "Profil",
+    name: "Profile",
     route: "/profile",
     icon: "mdi-account",
     children: [],
   },
   {
-    name: "Çıkış Yap",
+    name: "Logout",
     route: "/account/login",
     icon: "mdi-logout",
     children: [],

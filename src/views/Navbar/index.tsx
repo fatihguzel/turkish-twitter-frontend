@@ -8,6 +8,7 @@ import {
   List,
   Hidden,
   Grid,
+  MenuItem,
 } from "@mui/material";
 import React, { useState } from "react";
 import { navItems } from "./models/navbar";
@@ -19,10 +20,15 @@ import {
   getProfileAction,
   logoutAction,
 } from "@/redux/features/auth/asyncActions";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const dispatch: AppDispatch = useDispatch();
+  const { t, i18n } = useTranslation();
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
 
   const toggleDrawer = () => {
     setOpenDrawer(!openDrawer);
@@ -54,7 +60,7 @@ const Navbar = () => {
                 <Grid container justifyContent="flex-end">
                   {navItems.map((item) => (
                     <>
-                      {item?.name === "Çıkış Yap" ? (
+                      {item?.name === "Logout" ? (
                         <ButtonComponent
                           variant="text"
                           color="inherit"
@@ -62,19 +68,38 @@ const Navbar = () => {
                           onClick={logoutHandler}
                         >
                           <IconComponent icon={item?.icon} />
-                          <Typography>{item?.name}</Typography>
+                          <Typography>{t(`Navbar.${item?.name}`)}</Typography>
                         </ButtonComponent>
                       ) : (
-                        <Link href={item?.route}>
-                          <ButtonComponent
-                            variant="text"
-                            color="inherit"
-                            className="flex flex-row gap-x-2"
-                          >
-                            <IconComponent icon={item?.icon} />
-                            <Typography>{item?.name}</Typography>
-                          </ButtonComponent>
-                        </Link>
+                        <>
+                          {item?.name === "ChangeLanguage" ? (
+                            <>
+                              {item?.children?.map((child) => (
+                                <MenuItem
+                                  onClick={() => changeLanguage(child?.name)}
+                                >
+                                  {t(`Navbar.${item?.name}.${child?.name}`)}
+                                </MenuItem>
+                              ))}
+                            </>
+                          ) : (
+                            <Link
+                              href={item?.route}
+                              className="flex flex-row gap-x-2"
+                            >
+                              <ButtonComponent
+                                variant="text"
+                                color="inherit"
+                                className="flex flex-row gap-x-2"
+                              >
+                                <IconComponent icon={item?.icon} />
+                                <Typography>
+                                  {t(`Navbar.${item?.name}`)}
+                                </Typography>
+                              </ButtonComponent>
+                            </Link>
+                          )}
+                        </>
                       )}
                     </>
                   ))}
@@ -128,7 +153,7 @@ const Navbar = () => {
           <List>
             {navItems.map((item) => (
               <>
-                {item?.name === "Çıkış Yap" ? (
+                {item?.name === "Logout" ? (
                   <ButtonComponent
                     variant="text"
                     color="inherit"
@@ -136,19 +161,40 @@ const Navbar = () => {
                     onClick={logoutHandler}
                   >
                     <IconComponent icon={item?.icon} />
-                    <Typography>{item?.name}</Typography>
+                    <Typography>{t(`Navbar.${item?.name}`)}</Typography>
                   </ButtonComponent>
                 ) : (
-                  <Link href={item?.route}>
-                    <ButtonComponent
-                      variant="text"
-                      color="inherit"
-                      className="flex flex-row gap-x-2"
-                    >
-                      <IconComponent icon={item?.icon} />
-                      <Typography>{item?.name}</Typography>
-                    </ButtonComponent>
-                  </Link>
+                  <>
+                    {item?.name === "ChangeLanguage" ? (
+                      <>
+                        {item?.children?.map((child) => (
+                          <MenuItem
+                            onClick={() => {
+                              changeLanguage(child?.name);
+                              toggleDrawer();
+                            }}
+                          >
+                            {t(`Navbar.${item?.name}.${child?.name}`)}
+                          </MenuItem>
+                        ))}
+                      </>
+                    ) : (
+                      <Link
+                        href={item?.route}
+                        className="flex flex-row gap-x-2"
+                        onClick={toggleDrawer}
+                      >
+                        <ButtonComponent
+                          variant="text"
+                          color="inherit"
+                          className="flex flex-row gap-x-2"
+                        >
+                          <IconComponent icon={item?.icon} />
+                          <Typography>{t(`Navbar.${item?.name}`)}</Typography>
+                        </ButtonComponent>
+                      </Link>
+                    )}
+                  </>
                 )}
               </>
             ))}
