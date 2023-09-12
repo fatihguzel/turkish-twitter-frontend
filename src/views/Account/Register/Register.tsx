@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useFormik } from "formik";
 import { Grid, Typography, Box, Container } from "@mui/material";
@@ -12,10 +12,14 @@ import { AppDispatch } from "@/redux/store/store";
 import { useDispatch } from "react-redux";
 import { registerAction } from "@/redux/features/auth/asyncActions";
 import { useRouter } from "next/navigation";
+import SpinnerComponent from "@/components/Spinner/Spinner";
 
 const RegisterView = () => {
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -24,9 +28,14 @@ const RegisterView = () => {
     },
     validationSchema: RegisterSchema,
     onSubmit: (values) => {
+      setLoading(true);
+      setDisabled(true);
+
       let data = values;
       dispatch(registerAction(data)).then((res) => {
         console.log("res", res);
+        setLoading(false);
+        setDisabled(false);
         if (res?.meta?.requestStatus === "fulfilled") {
           router.push("/account/login");
         }
@@ -90,7 +99,21 @@ const RegisterView = () => {
 
             "
               >
-                <span className="text-blue-500">Turkish Twitter</span>{" "}
+                <Link
+                  href="/account/login"
+                  className="text-blue-500 
+                flex flex-row justify-center items-center
+                rounded-full
+                p-2
+                hover:bg-blue-500 hover:text-white
+                hover:border-transparent
+                focus:ring-blue-500 focus:ring-offset-blue-200
+                focus:outline-none focus:ring-2 focus:ring-offset-2
+                transition ease-in-out duration-300
+                "
+                >
+                  Turkish Twitter
+                </Link>
               </Typography>
               <Typography
                 variant="h6"
@@ -157,6 +180,7 @@ const RegisterView = () => {
                     fullWidth
                     variant="contained"
                     color="primary"
+                    disabled={disabled}
                     type="submit"
                     className="
                     text-white
@@ -167,7 +191,21 @@ const RegisterView = () => {
                     disabled:opacity-50
                   "
                   >
-                    Kayıt Ol
+                    {loading ? (
+                      <>
+                        Kayıt Yapılıyor...
+                        <SpinnerComponent
+                          color="secondary"
+                          size={20}
+                          sx={{
+                            marginLeft: "10px",
+                            color: "#fff",
+                          }}
+                        />
+                      </>
+                    ) : (
+                      "Kayıt Ol"
+                    )}
                   </ButtonComponent>
 
                   <DividerComponent className="my-4" />

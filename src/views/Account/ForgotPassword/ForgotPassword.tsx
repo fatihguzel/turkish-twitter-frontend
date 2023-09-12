@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { Grid, Typography, Box, Container } from "@mui/material";
 import { ForgotPasswordSchema } from "@/schema/account/change-password/ForgotPasswordSchema";
@@ -7,14 +7,21 @@ import TextFieldComponent from "@/components/TextField/TextField";
 import PaperComponent from "@/components/Paper/Paper";
 import ButtonComponent from "@/components/Button/Button";
 import DividerComponent from "@/components/Divider/Divider";
+import SpinnerComponent from "@/components/Spinner/Spinner";
+import Link from "next/link";
 
 const ForgotPasswordView = () => {
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const formik = useFormik({
     initialValues: {
       email: "",
     },
     validationSchema: ForgotPasswordSchema,
     onSubmit: (values) => {
+      setLoading(true);
+      setDisabled(true);
+
       console.log("Form Gönderildi", values);
     },
   });
@@ -75,7 +82,21 @@ const ForgotPasswordView = () => {
 
             "
               >
-                <span className="text-blue-500">Turkish Twitter</span>{" "}
+                <Link
+                  href="/account/login"
+                  className="text-blue-500 
+                flex flex-row justify-center items-center
+                rounded-full
+                p-2
+                hover:bg-blue-500 hover:text-white
+                hover:border-transparent
+                focus:ring-blue-500 focus:ring-offset-blue-200
+                focus:outline-none focus:ring-2 focus:ring-offset-2
+                transition ease-in-out duration-300
+                "
+                >
+                  Turkish Twitter
+                </Link>
               </Typography>
               <Typography
                 variant="h6"
@@ -115,6 +136,7 @@ const ForgotPasswordView = () => {
                     fullWidth
                     variant="contained"
                     color="primary"
+                    disabled={disabled}
                     type="submit"
                     className="
                     text-white
@@ -125,7 +147,22 @@ const ForgotPasswordView = () => {
                     disabled:opacity-50
                   "
                   >
-                    Şifre Sıfırlama Linki Gönder
+                    {" "}
+                    {loading ? (
+                      <>
+                        Şifre Sıfırlama Linki Gönderiliyor...
+                        <SpinnerComponent
+                          color="secondary"
+                          size={20}
+                          sx={{
+                            marginLeft: "10px",
+                            color: "#fff",
+                          }}
+                        />
+                      </>
+                    ) : (
+                      "Şifre Sıfırlama Linki Gönder"
+                    )}
                   </ButtonComponent>
                 </Box>
               </form>

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { Grid, Typography, Box, Container } from "@mui/material";
 import PaperComponent from "@/components/Paper/Paper";
@@ -11,18 +11,26 @@ import { AppDispatch } from "@/redux/store/store";
 import { useDispatch } from "react-redux";
 import { verifyAccountAction } from "@/redux/features/auth/asyncActions";
 import { useRouter } from "next/navigation";
+import SpinnerComponent from "@/components/Spinner/Spinner";
+import Link from "next/link";
 
 const VerifyAccountView = () => {
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const formik = useFormik({
     initialValues: {
       confirmCode: "",
     },
     validationSchema: VerifyAccountSchema,
     onSubmit: (values) => {
+      setLoading(true);
+      setDisabled(true);
       const data = values;
       dispatch(verifyAccountAction(data)).then((res) => {
+        setLoading(false);
+        setDisabled(false);
         if (res?.meta?.requestStatus === "fulfilled") {
           router.push("/account/login");
         }
@@ -86,7 +94,21 @@ const VerifyAccountView = () => {
 
             "
               >
-                <span className="text-blue-500">Turkish Twitter</span>{" "}
+                <Link
+                  href="/account/login"
+                  className="text-blue-500 
+                flex flex-row justify-center items-center
+                rounded-full
+                p-2
+                hover:bg-blue-500 hover:text-white
+                hover:border-transparent
+                focus:ring-blue-500 focus:ring-offset-blue-200
+                focus:outline-none focus:ring-2 focus:ring-offset-2
+                transition ease-in-out duration-300
+                "
+                >
+                  Turkish Twitter
+                </Link>
               </Typography>
               <Typography
                 variant="h6"
@@ -133,6 +155,7 @@ const VerifyAccountView = () => {
                     fullWidth
                     variant="contained"
                     color="primary"
+                    disabled={disabled}
                     type="submit"
                     className="
                     text-white
@@ -143,7 +166,21 @@ const VerifyAccountView = () => {
                     disabled:opacity-50
                   "
                   >
-                    Hesabı Doğrula
+                    {loading ? (
+                      <>
+                        Hesap Doğrulanıyor...
+                        <SpinnerComponent
+                          color="secondary"
+                          size={20}
+                          sx={{
+                            marginLeft: "10px",
+                            color: "#fff",
+                          }}
+                        />
+                      </>
+                    ) : (
+                      "Hesabı Doğrula"
+                    )}
                   </ButtonComponent>
                 </Box>
               </form>
