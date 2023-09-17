@@ -9,7 +9,7 @@ interface ICheckAuth {
 
 const useCheckAuth = ({ rootType }: ICheckAuth) => {
   const isLogined = useSelector(
-    (state: RootState) => state.auth.user.isLogined
+    (state: RootState) => state?.auth?.user?.isLogined
   );
   const router = useRouter();
 

@@ -6,6 +6,7 @@ const createApiTypes = (namespace: string) => ({
   LOGOUT: `${namespace}/logout`,
   GET_PROFILE: `${namespace}/profile`,
   VERIFY_ACCOUNT: `${namespace}/confirm`,
+  CHANGE_PASSWORD: `${namespace}/resetPassword`,
 });
 
 export const authTypes = createApiTypes(ApiENUM.AUTH);

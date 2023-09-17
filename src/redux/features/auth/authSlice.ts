@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { authSliceDTO } from "@/dtos/slice/slice";
 import {
+  changePasswordAction,
   getProfileAction,
   loginAction,
   logoutAction,
@@ -81,6 +82,14 @@ const authSlice = createSlice({
     builder.addCase(verifyAccountAction.rejected, (_state) => {
       toastHelper().toastErrorNotify("Hesap Doğrulama Başarısız");
     });
+
+    builder.addCase(changePasswordAction.fulfilled, (_state, { payload }) => {
+      _state.user = payload?.data;
+      Cookies.set("AUTH_DATA", JSON.stringify(payload?.data));
+      toastHelper().toastSuccessNotify("Şifre Değiştirme Başarılı");
+    });
+
+    builder.addCase(changePasswordAction.rejected, (_state) => {});
   },
 });
 

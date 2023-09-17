@@ -7,7 +7,11 @@ interface CardComponentProps extends CardProps {
 }
 
 const CardComponent = ({ title, children, ...props }: CardComponentProps) => {
-  return <Card {...props}>{children}</Card>;
+  return (
+    <Card title={title} {...props}>
+      {children}
+    </Card>
+  );
 };
 
 export default CardComponent;

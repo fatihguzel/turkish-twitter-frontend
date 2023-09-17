@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { Grid, Typography, Box, Container } from "@mui/material";
-import { ForgotPasswordSchema } from "@/schema/account/change-password/ForgotPasswordSchema";
+import { ForgotPasswordSchema } from "@/schema/account/forgot-password/ForgotPasswordSchema";
 import TextFieldComponent from "@/components/TextField/TextField";
 import PaperComponent from "@/components/Paper/Paper";
 import ButtonComponent from "@/components/Button/Button";

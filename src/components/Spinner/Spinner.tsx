@@ -4,7 +4,14 @@ import React from "react";
 interface SpinnerProps extends CircularProgressProps {
   size?: number;
   thickness?: number;
-  color?: "primary" | "secondary" | "inherit";
+  color?:
+    | "primary"
+    | "secondary"
+    | "inherit"
+    | "success"
+    | "error"
+    | "info"
+    | "warning";
 }
 
 const SpinnerComponent = ({

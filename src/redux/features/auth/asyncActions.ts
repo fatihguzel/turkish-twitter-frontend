@@ -4,6 +4,7 @@ import { authTypes } from "@/types/apiTypes";
 import { LoginDto } from "@/dtos/auth/login/login";
 import { RegisterDto } from "@/dtos/auth/register/register";
 import { VerifyAccountDto } from "@/dtos/auth/verify/verify";
+import { ChangePasswordDto } from "@/dtos/auth/change-password/changePassword";
 
 const registerAction = createAsyncThunk(
   "registerAction/auth",
@@ -48,10 +49,22 @@ const verifyAccountAction = createAsyncThunk(
   }
 );
 
+const changePasswordAction = createAsyncThunk(
+  "changePassword/auth",
+  async (data: ChangePasswordDto) => {
+    const res = await axiosBase.put(`${authTypes.CHANGE_PASSWORD}`, {
+      ...data,
+    });
+
+    return res?.data;
+  }
+);
+
 export {
   registerAction,
   loginAction,
   getProfileAction,
   logoutAction,
   verifyAccountAction,
+  changePasswordAction,
 };

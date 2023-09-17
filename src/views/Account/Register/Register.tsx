@@ -33,7 +33,6 @@ const RegisterView = () => {
 
       let data = values;
       dispatch(registerAction(data)).then((res) => {
-        console.log("res", res);
         setLoading(false);
         setDisabled(false);
         if (res?.meta?.requestStatus === "fulfilled") {

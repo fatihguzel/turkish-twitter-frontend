@@ -1,13 +1,17 @@
 import AvatarComponent from "@/components/Avatar/Avatar";
+import ButtonComponent from "@/components/Button/Button";
+import DialogComponent from "@/components/Dialog/Dialog";
 import ListComponent from "@/components/List/List";
 import ListItemComponent from "@/components/List/ListItem";
 import { RootState } from "@/redux/store/store";
 import { Grid, ListItemText } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import ChangePasswordModal from "./components/ChangePassword";
 
 const ProfileHeader = () => {
   const user = useSelector((state: RootState) => state?.auth?.user);
+  const [open, setOpen] = useState(false);
 
   return (
     <Grid container spacing={2}>
@@ -51,6 +55,35 @@ const ProfileHeader = () => {
             />
           </ListItemComponent>
         </ListComponent>
+      </Grid>
+
+      <Grid item xs={12} sm={12} md={6} lg={4}>
+        <ButtonComponent
+          fullWidth
+          variant="contained"
+          color="primary"
+          size="large"
+          className="mt-2
+                bg-blue-500
+                hover:bg-blue-600
+                text-white
+                hover:drop-shadow-lg
+                transition
+                duration-500
+            "
+          onClick={() => setOpen(true)}
+        >
+          Şifremi Değiştir
+        </ButtonComponent>
+
+        <DialogComponent
+          open={open}
+          setOpen={setOpen}
+          title="Şifre Değiştir"
+          maxWidth="md"
+        >
+          <ChangePasswordModal setOpen={setOpen} />
+        </DialogComponent>
       </Grid>
     </Grid>
   );
