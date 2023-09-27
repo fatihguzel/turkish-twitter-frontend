@@ -1,6 +1,6 @@
 import { ApiENUM } from "./enum";
 
-const createApiTypes = (namespace: string) => ({
+const createAuthTypes = (namespace: string) => ({
   LOGIN: `${namespace}/login`,
   REGISTER: `${namespace}/register`,
   LOGOUT: `${namespace}/logout`,
@@ -9,4 +9,9 @@ const createApiTypes = (namespace: string) => ({
   CHANGE_PASSWORD: `${namespace}/resetPassword`,
 });
 
-export const authTypes = createApiTypes(ApiENUM.AUTH);
+const createBlogTypes = (namespace: string) => ({
+  GET_USER_BLOGS: `${namespace}/getUserBlogs`,
+});
+
+export const authTypes = createAuthTypes(ApiENUM.AUTH);
+export const blogTypes = createBlogTypes(ApiENUM.BLOG);

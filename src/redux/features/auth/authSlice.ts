@@ -3,6 +3,7 @@ import { authSliceDTO } from "@/dtos/slice/slice";
 import {
   changePasswordAction,
   getProfileAction,
+  getUserBlogsAction,
   loginAction,
   logoutAction,
   registerAction,
@@ -23,6 +24,20 @@ const initialState: authSliceDTO = {
     confirmCode: "",
     biography: "",
   },
+  user_blogs: [
+    {
+      _id: "",
+      title: "",
+      text: "",
+      user: "",
+      username: "",
+      comments: [],
+      likes: [],
+      isBlocked: false,
+      createdAt: "",
+      updatedAt: "",
+    },
+  ],
 };
 
 const authSlice = createSlice({
@@ -90,6 +105,10 @@ const authSlice = createSlice({
     });
 
     builder.addCase(changePasswordAction.rejected, (_state) => {});
+
+    builder.addCase(getUserBlogsAction.fulfilled, (state, { payload }) => {
+      state.user_blogs = payload?.data;
+    });
   },
 });
 

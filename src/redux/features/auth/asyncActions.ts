@@ -1,6 +1,6 @@
 import axiosBase from "@/config/axiosBase";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { authTypes } from "@/types/apiTypes";
+import { authTypes, blogTypes } from "@/types/apiTypes";
 import { LoginDto } from "@/dtos/auth/login/login";
 import { RegisterDto } from "@/dtos/auth/register/register";
 import { VerifyAccountDto } from "@/dtos/auth/verify/verify";
@@ -60,6 +60,17 @@ const changePasswordAction = createAsyncThunk(
   }
 );
 
+const getUserBlogsAction = createAsyncThunk(
+  "getUserBlogs/auth",
+  async (data: String) => {
+    const res = await axiosBase.post(`${blogTypes.GET_USER_BLOGS}`, {
+      email: data,
+    });
+
+    return res?.data;
+  }
+);
+
 export {
   registerAction,
   loginAction,
@@ -67,4 +78,5 @@ export {
   logoutAction,
   verifyAccountAction,
   changePasswordAction,
+  getUserBlogsAction,
 };

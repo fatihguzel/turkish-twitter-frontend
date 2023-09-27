@@ -101,6 +101,7 @@ const ChangePasswordModal = ({ setOpen }: ChangePasswordModalProps) => {
             label="Eski Şifre"
             name="oldPassword"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             error={!!errors.oldPassword}
           />
         </Grid>
@@ -109,6 +110,7 @@ const ChangePasswordModal = ({ setOpen }: ChangePasswordModalProps) => {
             label="Yeni Şifre"
             name="newPassword"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             error={!!errors.newPassword}
           />
         </Grid>
@@ -117,6 +119,7 @@ const ChangePasswordModal = ({ setOpen }: ChangePasswordModalProps) => {
             label="Yeni Şifre Tekrar"
             name="againPassword"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             error={!!errors.againPassword}
           />
         </Grid>

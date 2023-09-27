@@ -10,4 +10,16 @@ export interface authSliceDTO {
     confirmCode: string;
     biography: string;
   };
+  user_blogs: {
+    _id: string;
+    title: string;
+    text: string;
+    user: string;
+    username: string;
+    comments: any[];
+    likes: any[];
+    isBlocked: boolean;
+    createdAt: string;
+    updatedAt: string;
+  }[];
 }

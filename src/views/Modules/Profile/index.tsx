@@ -1,10 +1,20 @@
 import CardComponent from "@/components/Card/Card";
-import React from "react";
+import React, { useEffect } from "react";
 import ProfileHeader from "./Header/ProfileHeader";
 import { Container } from "@mui/material";
 import ProfileBody from "./Body/ProfileBody";
+import { AppDispatch, RootState } from "@/redux/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserBlogsAction } from "@/redux/features/auth/asyncActions";
 
 const ProfileView = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const { user } = useSelector((state: RootState) => state.auth);
+
+  useEffect(() => {
+    dispatch(getUserBlogsAction(user?.email));
+  }, [dispatch, user, user?.email]);
+
   return (
     <Container
       maxWidth="xl"
@@ -40,7 +50,6 @@ const ProfileView = () => {
             w-full
             mt-5
             mx-auto
-            p-10
             shadow-lg
             rounded-md
             text-gray-800
