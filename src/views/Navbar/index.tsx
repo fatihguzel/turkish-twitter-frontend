@@ -76,6 +76,7 @@ const Navbar = () => {
                             <>
                               {item?.children?.map((child) => (
                                 <MenuItem
+                                  key={child?.name}
                                   onClick={() => changeLanguage(child?.name)}
                                 >
                                   {t(`Navbar.${item?.name}.${child?.name}`)}
@@ -169,6 +170,7 @@ const Navbar = () => {
                       <>
                         {item?.children?.map((child) => (
                           <MenuItem
+                            key={child?.name}
                             onClick={() => {
                               changeLanguage(child?.name);
                               toggleDrawer();

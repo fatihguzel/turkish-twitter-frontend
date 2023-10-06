@@ -1,11 +1,10 @@
-import CardComponent from "@/components/Card/Card";
 import React from "react";
-import { IUserBlogs } from "../models/profilebody.model";
 import PaperComponent from "@/components/Paper/Paper";
 import DividerComponent from "@/components/Divider/Divider";
 import IconComponent from "@/components/Icon/Icon";
 import Image from "next/image";
 import AlertComponent from "@/components/Alert/Alert";
+import { IUserBlogs } from "@/dtos/blogs/blogs";
 
 interface Props {
   user_blogs: IUserBlogs;

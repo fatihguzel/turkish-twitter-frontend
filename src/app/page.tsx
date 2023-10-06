@@ -1,5 +1,6 @@
 "use client";
 import useCheckAuth from "@/hooks/useCheckAuth";
+import { Typography } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

@@ -2,6 +2,7 @@ import React from "react";
 import Posts from "./components/Posts";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
+import { IUserBlogs } from "@/dtos/blogs/blogs";
 
 const ProfileBody = () => {
   const { user_blogs } = useSelector((state: RootState) => state.auth);
@@ -22,7 +23,7 @@ const ProfileBody = () => {
         rounded-md
       "
     >
-      {user_blogs?.map((user_blogs) => (
+      {user_blogs?.map((user_blogs: IUserBlogs) => (
         <Posts key={user_blogs._id} user_blogs={user_blogs} />
       ))}
     </div>
