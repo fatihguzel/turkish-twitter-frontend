@@ -8,7 +8,6 @@ import { store } from "@/redux/store/store";
 import { I18nextProvider } from "react-i18next";
 import i18n from "@/config/i18n";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { CssBaseline } from "@mui/material";
 import { themeConfig } from "@/config/theme";
 
 const inter = Inter({ subsets: ["latin"] });
